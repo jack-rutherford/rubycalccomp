@@ -228,6 +228,24 @@ class TimesNode < BinaryNode
   end
 end
 
+class StoreNode < UnaryNode
+  def initialize(subtree)
+    super(subtree)
+  end
+  
+  def evaluate() 
+    @subTree.evaluate()
+    $calc.out.write("memory := M[sp + 0]\n")
+  end
+end
+
+class RecallNode
+  def evaluate() 
+    $calc.out.write("sp := sp + one\n")
+    $calc.out.write("M[sp + 0] := memory\n")
+  end
+end
+
 class NumNode 
   def initialize(num)
     @num = num
