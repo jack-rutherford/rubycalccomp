@@ -246,6 +246,16 @@ class RecallNode
   end
 end
 
+class IntNode
+  def evaluate() 
+    $calc.out.write("prompt := \"Please enter an integer\"\n")   
+    $calc.out.write("writeStr(prompt)\n")
+    $calc.out.write("readInt(num)\n")
+    $calc.out.write("sp := sp + one\n")
+    $calc.out.write("M[sp + 0] := num\n")
+  end
+end
+
 class NumNode 
   def initialize(num)
     @num = num
@@ -347,6 +357,9 @@ class Parser
   if t.type == :keyword && t.lex == "R" then
      return RecallNode.new()
   end
+  if t.lex == "I" then
+    return IntNode.new()
+  end
   if t.type == :lparen then
      e = Expr()
      t = @scan.getToken()
@@ -386,7 +399,7 @@ class Calculator
     @out.write("halt\n")
     @out.write("equ zero M[0] equ one M[1] \n")
     @out.write("equ memory M[2] equ sp M[3]\n")
-    @out.write("equ A M[4] equ B M[5]\n")
+    @out.write("equ A M[4] equ B M[5] equ num M[6]\n")
     @out.write("equ s M[10] equ prompt M[30]\n") 
   end
 end
