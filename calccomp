@@ -25,7 +25,7 @@ end
 class Scanner
   def initialize(inStream)
     @istream = inStream
-    @keywords = Set.new(["S","R"])
+    @keywords = Set.new(["S","R","I"])
     @lineCount = 1
     @colCount = -1
     @needToken = true
@@ -357,7 +357,7 @@ class Parser
   if t.type == :keyword && t.lex == "R" then
      return RecallNode.new()
   end
-  if t.lex == "I" then
+  if t.type == :keyword && t.lex == "I" then
     return InputNode.new()
   end
   if t.type == :lparen then
