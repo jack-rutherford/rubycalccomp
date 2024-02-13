@@ -246,7 +246,7 @@ class RecallNode
   end
 end
 
-class IntNode
+class InputNode
   def evaluate() 
     $calc.out.write("prompt := \"Please enter an integer\"\n")   
     $calc.out.write("writeStr(prompt)\n")
@@ -358,7 +358,7 @@ class Parser
      return RecallNode.new()
   end
   if t.lex == "I" then
-    return IntNode.new()
+    return InputNode.new()
   end
   if t.type == :lparen then
      e = Expr()
