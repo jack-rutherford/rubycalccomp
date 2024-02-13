@@ -248,7 +248,7 @@ end
 
 class InputNode
   def evaluate() 
-    $calc.out.write("prompt := \"Please enter an integer\"\n")   
+    # $calc.out.write("prompt := \"Please enter an integer\"\n")   
     $calc.out.write("writeStr(prompt)\n")
     $calc.out.write("readInt(num)\n")
     $calc.out.write("sp := sp + one\n")

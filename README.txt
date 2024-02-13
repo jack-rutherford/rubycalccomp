@@ -2,8 +2,23 @@ Include a README.txt describing what you learned from this assignment about the 
 In your README.txt file, describe how your generated EWE code works for Multiply, Divide, Store, Recall, and Input 
 (just the ones you completed).
 
-Some of the differences that I noticed between C++ and Ruby is the static and dynamic typing that these languages have.
+One of the differences that I noticed between C++ and Ruby is the static and dynamic typing that these languages have.
 C++ being statically typed is something that I took advantage of when writing code, as I could hover over a variable and have VSCode
 tell me the type of it inline. Ruby didn't have anything as nice as this, but it has a different feature where you don't have to declare
 a type for variables at all. Since it is dynamically typed I can write a line such as f = Factor() and not worry about the type of f, I
-can just use it and see run time errors when you run the calccomp.
+can just use it and see run time errors when you run the calccomp. A nice quality-of-life change is the attr_reader syntax; the fact that
+it makes automatic accessors with this is very nice and removes a lot of menial code you would have to write.
+
+The multiply and divide nodes are extremely similar to the add and subtract nodes. It's important to notice that we do B / A because of
+how we put numbers into memory. When we put 12 / 3 into memory, we load 12 into 100, and 3 into 101. When we divide or subtract we work
+backward with sp (decrementing it), so A will be 3, sp--, and then B is 12. So doing B (/ or -) A is necessary. Store and Recall nodes
+work fairly simply with StoreNode having a subtree, and its evaluate method changing the memory variable to be whatever is at M[sp+0].
+Recall nodes evaluate method then works by incrementing the stack pointer and setting M[sp] equal to what memory is. The input node took
+a little thinking to implement at first, but I ended up making a new node called the input node that writes the prompt to the screen, reads
+an int into the num variable, increments the stack pointer, and sets M[sp + 0] to what num is. I added the num variable to equ M[6]. I
+check in the factor method to see if t is a keyword (added I to keywords) and if the lex is "I". If it is I return a new input node which
+writes the ewe code to the file to ask the User for a number.
+
+Overall I think this was a cool project to see a project transfer over to a different language and see the differences between them. It
+made it easy and challenging at the same time, knowing what to do but figuring out how to do it in a new language where you don't know
+the constructs as well.
